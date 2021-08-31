@@ -1,7 +1,7 @@
 name: telegram message
-on: workflow_dispatch
-  # schedule:
-  #   - cron:  '0 8,12,21 * * *'
+on:
+  schedule:
+    - cron:  '0 8,12,21 * * *'
 
 jobs:
   check:
@@ -28,4 +28,4 @@ jobs:
         token: ${{ secrets.TELEGRAM_TOKEN }}
         message: |
           Checking for Bupa Locations in [Sydney - NSW]:
-          echo ${{ steps.run_script_check.outputs.npm }}
+          ${{ steps.run_script_check.outputs.npm }}
