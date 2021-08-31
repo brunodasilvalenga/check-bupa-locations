@@ -1,0 +1,31 @@
+name: telegram message
+on: workflow_dispatch
+  # schedule:
+  #   - cron:  '0 8,12,21 * * *'
+
+jobs:
+  check:
+    name: check
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+
+    - uses: actions/setup-node@v1
+
+    - uses: microsoft/playwright-github-action@v1
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run Script
+      id: run_script_check
+      run: echo "::set-output name=npm::$(npm run check)\n"
+
+    - name: send custom message
+      uses: appleboy/telegram-action@master
+      with:
+        to: ${{ secrets.TELEGRAM_TO }}
+        token: ${{ secrets.TELEGRAM_TOKEN }}
+        message: |
+          Found Locations
+          ${{ steps.run_script_check.output.npm }}"
