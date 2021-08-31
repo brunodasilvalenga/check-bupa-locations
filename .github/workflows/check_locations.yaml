@@ -19,7 +19,7 @@ jobs:
 
     - name: Run Script
       id: run_script_check
-      run: echo "::set-output name=npm::$(npm run check)\n"
+      run: echo "##[set-output name=npm;]$(npm run check)"
 
     - name: send custom message
       uses: appleboy/telegram-action@master
