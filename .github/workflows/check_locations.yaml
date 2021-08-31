@@ -19,11 +19,13 @@ jobs:
 
     - name: Run Script
       id: run_script_check
-      run: echo "##[set-output name=npm;]$(npm run check)"
+      run: echo "##[set-output name=npm;]$(node index.js)"
 
     - name: send custom message
       uses: appleboy/telegram-action@master
       with:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
-        message: ${{ steps.run_script_check.outputs.npm }}
+        message: |
+        Checking for Bupa Locations in [Sydney - NSW]:
+        echo ${{ steps.run_script_check.outputs.npm }}

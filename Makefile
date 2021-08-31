@@ -22,7 +22,7 @@ install: .env
 	$(RUN_NODEJS) npm install
 
 shell: .env
-	$(RUN_NODEJS_SHELL) 
+	$(RUN_NODEJS_SHELL)
 
 run:
-	docker run -it --rm --env-file=.env -w /work -v $(shell pwd)/:/work --entrypoint=node mcr.microsoft.com/playwright:focal index.js
+	$(RUN_PLAYWRIGHT) index.js
