@@ -3,8 +3,8 @@ const playwright = require('playwright');
 const baseUrl = 'https://bmvs.onlineappointmentscheduling.net.au/oasis/Default.aspx';
 
 const search = {
-  city: 'Brisbane',
-  state: 'QLD'
+  city: 'Sydney',
+  state: 'NSW'
 };
 
 (async () => {
