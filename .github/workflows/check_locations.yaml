@@ -27,5 +27,5 @@ jobs:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
         message: |
-        Checking for Bupa Locations in [Sydney - NSW]:
-        echo ${{ steps.run_script_check.outputs.npm }}
+          Checking for Bupa Locations in [Sydney - NSW]:
+          echo ${{ steps.run_script_check.outputs.npm }}
