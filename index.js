@@ -28,15 +28,27 @@ const search = {
   ]);
 
   const locations = await page.$$("div#ContentPlaceHolder1_SelectLocation1_divLocations");
-  if (locations.length) {
-    console.log('Found locations!')
-    const foundLocations = await page.$$eval("table", (nodes) =>
-      nodes.map((n) => n.innerText)
-    );
 
-    console.log(foundLocations)
+  if (locations.length) {
+    const foundLocations = await page.$$eval('table tbody .trlocation', (nodes) => {
+      console.log(nodes.length)
+      return nodes.map(item => {
+          const location = item.querySelector('.tdlocNameTitle')
+          const distance = item.querySelector('td:nth-child(3)');
+          return {
+              location: location.textContent.trim(),
+              distance: distance.textContent.trim()
+          };
+      });
+    });
+
+    const foundLocationsLessThan100Km = foundLocations.filter(item => {
+      return parseInt(item.distance.split(' ')[0]) < 100
+    })
+    console.log(`Found ${foundLocationsLessThan100Km.length} near locations. (100Km)`)
+    foundLocationsLessThan100Km.forEach((item) => console.log(`${item.location} - ${item.distance}`))
   } else {
-    console.log('No locations Found :(')
+    console.log('No locations available :(')
   }
 
   await browser.close();
