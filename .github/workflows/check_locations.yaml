@@ -29,3 +29,12 @@ jobs:
         message: |
           Checking for Bupa Locations in [Sydney - NSW]:
           ${{ steps.run_script_check.outputs.npm }}
+
+    - name: send custom message
+      uses: appleboy/telegram-action@master
+      with:
+        to: ${{ secrets.TELEGRAM_TO_DAYSE }}
+        token: ${{ secrets.TELEGRAM_TOKEN }}
+        message: |
+          Checking for Bupa Locations in [Sydney - NSW]:
+          ${{ steps.run_script_check.outputs.npm }}
